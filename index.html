@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephen Sidlo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--w:#fff;--b:#0b0b0b;--g:#888;--r:rgba(0,0,0,0.09);--f:'Inter',system-ui,sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:var(--w);color:var(--b);font-family:var(--f);font-weight:300;overflow-x:hidden;}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:300;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:22px 44px;
+  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,.15);
+}
+.nlink{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-decoration:none;opacity:.6;transition:opacity .2s;}
+.nlink:hover{opacity:1;}
+
+/* SECTION 1: HERO */
+.hero{
+  position:relative;
+  width:100%;
+  background:#000;
+  height:100vh;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1920') center/cover no-repeat;
+  opacity:.35;
+}
+.hero::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.65) 0%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.75) 100%);
+  z-index:1;
+}
+.hero video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.6;
+  filter:contrast(1.1) saturate(1.05);
+}
+.hero-name{
+  position:absolute;bottom:40px;left:-4px;z-index:2;
+  font-size:clamp(80px,14vw,200px);
+  font-weight:900;color:#fff;line-height:.82;letter-spacing:-.08em;text-shadow:0 20px 60px rgba(0,0,0,.6);
+  transform-origin:left bottom;will-change:transform;pointer-events:none;
+}
+
+/* SECTION 2: BIO */
+.bio{padding:120px 44px 100px;border-bottom:1px solid var(--r);}
+.bio p{font-size:clamp(22px,3vw,38px);font-weight:300;line-height:1.3;letter-spacing:-.01em;max-width:900px;}
+
+/* SECTION 3: DISCIPLINES — full width black, stacked */
+.disc-section{background:var(--b);padding:160px 44px;}
+.disc-kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:40px;display:block;}
+.disc-item{
+  font-size:clamp(22px,3.5vw,44px);
+  font-weight:600;line-height:1.05;padding:20px 0;
+  border-top:none;
+  color:rgba(255,255,255,.35);
+  letter-spacing:-.02em;transition:color .4s ease;
+}
+.disc-item.lit{color:rgba(255,255,255,.92);}
+
+/* SECTION 4: SELECTED EXPERIENCE — full width black, clickable rows */
+.exp-section{background:var(--b);border-top:none;}
+.exp-header{
+  padding:28px 44px 20px;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.exp-row{
+  display:grid;grid-template-columns:1fr auto;
+  align-items:center;padding:0 44px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  cursor:pointer;min-height:76px;gap:20px;
+  position:relative;overflow:hidden;transition:background .25s;
+}
+.exp-row-img{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .5s ease;filter:grayscale(30%);}
+.exp-row:hover .exp-row-img{opacity:.15;}
+.exp-row:hover{background:rgba(255,255,255,.04);}
+.exp-name{font-size:clamp(18px,2.5vw,32px);font-weight:600;letter-spacing:-.02em;line-height:1;color:rgba(255,255,255,.7);transition:color .25s;position:relative;z-index:1;}
+.exp-row:hover .exp-name{color:#fff;}
+.exp-meta{text-align:right;font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.04em;line-height:1.6;white-space:nowrap;transition:opacity .25s;position:relative;z-index:1;}
+.exp-row:hover .exp-meta{opacity:0;}
+.exp-arrow{position:absolute;right:44px;top:50%;transform:translateY(-50%) translateX(10px);opacity:0;transition:all .25s;font-size:20px;color:rgba(255,255,255,.6);z-index:1;}
+.exp-row:hover .exp-arrow{opacity:1;transform:translateY(-50%) translateX(0);}
+
+/* GALLERY MODAL — full screen carousel */
+.gal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:600;opacity:0;transition:opacity .35s;}
+.gal-backdrop.vis{opacity:1;}
+.gal-modal{
+  position:fixed;inset:0;z-index:700;
+  display:none;align-items:center;justify-content:center;
+}
+.gal-modal.open{display:flex;}
+.gal-inner{
+  width:100%;max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;background:#111;
+  height:80vh;max-height:700px;
+  position:relative;
+}
+.gal-img-wrap{overflow:hidden;position:relative;background:#000;}
+.gal-img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(15%);transition:opacity .4s ease;}
+.gal-info{
+  padding:48px 44px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  background:#111;overflow-y:auto;
+}
+.gal-co{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:12px;}
+.gal-title{font-size:clamp(24px,3vw,42px);font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.05;margin-bottom:20px;}
+.gal-desc{font-size:14px;line-height:1.85;color:rgba(255,255,255,.55);flex:1;}
+.gal-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);margin-top:28px;}
+.gstat{background:#111;padding:16px 18px;}
+.gstat-n{font-size:22px;font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1;margin-bottom:3px;}
+.gstat-l{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);}
+/* nav controls */
+.gal-close{position:absolute;top:20px;right:20px;font-size:26px;color:rgba(255,255,255,.5);cursor:pointer;z-index:10;transition:color .2s;background:none;border:none;line-height:1;}
+.gal-close:hover{color:#fff;}
+.gal-prev,.gal-next{
+  position:absolute;bottom:20px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  color:#fff;font-size:18px;cursor:pointer;
+  width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:10;
+}
+.gal-prev:hover,.gal-next:hover{background:rgba(255,255,255,.16);}
+.gal-prev{right:68px;}
+.gal-next{right:20px;}
+.gal-counter{position:absolute;bottom:28px;left:44px;font-size:11px;letter-spacing:.12em;color:rgba(255,255,255,.3);}
+
+/* SECTION 5: INTERLUDE */
+.interlude{padding:120px 44px;border-top:1px solid var(--r);border-bottom:1px solid var(--r);}
+.interlude p{font-size:clamp(20px,2.8vw,34px);font-weight:300;line-height:1.4;letter-spacing:-.01em;color:#444;max-width:780px;}
+.interlude strong{color:var(--b);font-weight:600;}
+
+/* SECTION 6: PROJECTS — square 1:1, auto-scroll */
+.proj-label{padding:28px 44px 20px;border-bottom:1px solid var(--r);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--g);}
+.proj-outer{overflow:hidden;}
+.proj-track{display:flex;width:max-content;animation:pscroll 48s linear infinite;}
+.proj-outer:hover .proj-track{animation-play-state:paused;}
+@keyframes pscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.proj-card{
+  margin-right:24px;
+  flex:0 0 300px;
+  border-right:1px solid var(--r);
+  box-shadow:0 10px 30px rgba(0,0,0,.04);
+}
+.proj-img{
+  width:300px;
+  height:300px;
+  object-fit:cover;
+  display:block;
+  filter:grayscale(15%) contrast(1.05);
+  transition:all .5s ease;
+}
+.proj-card:hover .proj-img{
+  filter:grayscale(0%) contrast(1.1);
+  transform:scale(1.03);
+}
+.proj-info{padding:16px 20px 22px;}
+.proj-org{font-size:12px;font-weight:600;margin-bottom:4px;letter-spacing:-.01em;}
+.proj-desc{font-size:11px;line-height:1.7;color:var(--g);}
+
+/* SECTION 7: RECOGNITION */
+.recog-section{background:var(--b);padding:80px 0 100px;}
+.recog-kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);padding:0 44px 48px;display:block;}
+.recog-list{padding:0 44px;}
+.recog-item{
+  display:grid;grid-template-columns:54px 200px 1fr;
+  align-items:baseline;gap:0;
+  padding:18px 0;border-top:1px solid rgba(255,255,255,.06);
+  color:rgba(255,255,255,.22);transition:color .4s ease;cursor:default;
+}
+.recog-item.lit{color:#fff;}
+.recog-item:last-child{border-bottom:1px solid rgba(255,255,255,.06);}
+.recog-num{font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.18);transition:color .4s ease;padding-top:5px;}
+.recog-item.lit .recog-num{color:rgba(255,255,255,.4);}
+.recog-body{font-size:11px;font-weight:400;letter-spacing:.02em;color:rgba(255,255,255,.25);transition:color .4s ease;padding-right:24px;line-height:1.3;padding-top:5px;}
+.recog-item.lit .recog-body{color:rgba(255,255,255,.5);}
+.recog-name{font-size:clamp(20px,2.8vw,40px);font-weight:700;line-height:1.05;letter-spacing:-.02em;transition:color .4s ease;}
+
+/* SECTION 8: FOOTER */
+footer{background:var(--b);border-top:none;padding:64px 44px 44px;}
+.ft-name{font-size:clamp(64px,13vw,210px);font-weight:900;color:#fff;line-height:.82;letter-spacing:-.08em;text-shadow:0 20px 60px rgba(0,0,0,.6);margin-bottom:64px;}
+.ft-bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(255,255,255,.08);padding-top:28px;}
+.ft-email{
+  color:#fff !important;
+  font-size:28px;
+  color:#fff;
+font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;display:block;margin-bottom:8px;transition:color .2s;}
+.ft-email:hover{color:#fff;}
+.ft-note{
+  color:rgba(255,255,255,.85);font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.06em;line-height:1.7;}
+.ft-r{
+  color:rgba(255,255,255,.85);font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.08em;line-height:2.2;text-align:right;}
+
+.grain{
+  pointer-events:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  opacity:.04;
+  background-image:url('https://grainy-gradients.vercel.app/noise.svg');
+}
+
+.exp-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:40px 60px;
+  text-align:right;
+}
+.exp-grid-item{
+  font-size:14px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  opacity:.7;
+}
+
+.disc-wrap{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:120px;
+  align-items:center;
+  min-height:60vh;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+
+.exp-section-inline{
+  background:var(--b);
+}
+
+.exp-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:40px 80px;
+  text-align:right;
+  padding-top:40px;
+}
+
+.exp-grid-item{
+  font-size:14px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:rgba(255,255,255,.7);
+}
+
+.disc-section{
+  background:var(--b);
+  padding:140px 44px;
+}
+
+.disc-wrap{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:120px;
+  align-items:center;
+  min-height:60vh;
+
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:120px;
+}
+
+.disc-left .disc-item{
+  color:#fff;
+
+  font-size:clamp(24px,3vw,42px);
+  font-weight:600;
+  margin-bottom:24px;
+}
+
+.disc-right{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px 80px;
+  align-content:center;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px 60px;
+  align-content:start;
+}
+
+.company{
+  font-size:15px;
+  font-size:17px;
+
+  font-size:13px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+  cursor:pointer;
+  transition:color .25s ease, transform .25s ease;
+}
+
+.company:hover{
+  color:#fff;
+  transform:translateX(-4px);
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all .8s cubic-bezier(.2,.6,.2,1);
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+
+.interlude-wrap{
+  display:grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap:80px;
+  align-items:end;
+}
+.interlude-img{
+  transform:translateY(-40px);
+}
+.interlude-img img{
+  width:100%;
+  max-width:460px;
+  height:auto;
+  display:block;
+  object-fit:cover;
+  border-radius:2px;
+  box-shadow:0 30px 80px rgba(0,0,0,.12);
+  filter:grayscale(10%) contrast(1.05);
+}
+
+</style>
+</head>
+<body>
+
+<nav style="justify-content:space-between; align-items:center;">
+  <div>
+    <a class="nlink" href="https://www.linkedin.com/in/stephensidlo" target="_blank" rel="noopener">Experience</a>
+  </div>
+  <div class="nlink" style="opacity:1; cursor:default;">Left Follows Right</div>
+  <div>
+    <a class="nlink" href="mailto:stephen@leftfollowsright.com">Contact</a>
+  </div>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="sidlo-video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-name" id="heroName">Stephen<br>Sidlo</div>
+</section>
+
+<!-- 2. BIO -->
+<section class="bio">
+  <p>Stephen Sidlo is an award-winning marketing and media strategist who builds the brands, stories and commercial ecosystems that help the world's most innovative companies reach their full potential.</p>
+</section>
+
+<!-- 3. WHAT I DO -->
+
+<section class="disc-section">
+  <div class="disc-wrap">
+
+    <div class="disc-left">
+      <span class="disc-kicker">What I do</span>
+      <div class="disc-item">Go-to-Market Strategy</div>
+      <div class="disc-item">Brand Architecture</div>
+      <div class="disc-item">Broadcast & Media Rights</div>
+      <div class="disc-item">Creative Direction</div>
+      <div class="disc-item">Commercial Partnerships</div>
+      <div class="disc-item">Storytelling & Communications</div>
+    </div>
+
+    <div class="disc-right">
+      <div class="company">AIRSPEEDER</div>
+      <div class="company">ALAUDA</div>
+      <div class="company">ROBORACE</div>
+      <div class="company">GOODWOOD</div>
+      <div class="company">ELIRE</div>
+      <div class="company">LEO FLIGHT</div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- 4. SELECTED EXPERIENCE -->
+
+
+<!-- GALLERY MODAL -->
+
+<div class="gal-backdrop" id="galBd"></div>
+<div class="gal-modal" id="galModal">
+  <div class="gal-inner">
+    <div class="gal-img-wrap">
+      <img class="gal-img" id="galImg" src="" alt="">
+    </div>
+    <div class="gal-info">
+      <div>
+        <div class="gal-co" id="galCo"></div>
+        <div class="gal-title" id="galTitle"></div>
+        <div class="gal-desc" id="galDesc"></div>
+      </div>
+      <div class="gal-stats" id="galStats"></div>
+    </div>
+    <button class="gal-close" id="galClose">&#x2715;</button>
+    <div class="gal-counter" id="galCounter"></div>
+    <button class="gal-prev" id="galPrev">&#8592;</button>
+    <button class="gal-next" id="galNext">&#8594;</button>
+  </div>
+</div>
+
+<!-- 5. INTERLUDE -->
+<section class="interlude">
+  <div class="interlude-wrap">
+    <div class="interlude-img">
+      <img src="headshot.jpg" alt="Stephen Sidlo">
+    </div>
+    <div class="interlude-text">
+      <p>
+        Driven by a belief that world-changing ideas deserve the boldest stories, Stephen has spent his career at the frontier, helping companies rewrite what is possible across eVTOL aviation, autonomous motorsport, electric vehicles, defence and deep tech.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. SELECTED PROJECTS -->
+<section>
+  <div class="proj-label">Selected Projects</div>
+  <div class="proj-outer">
+    <div class="proj-track">
+
+      <div class="proj-card">
+        <img class="proj-img" src="/mnt/data/airspeeder.png" alt="World's First Flying Car Race" loading="lazy">
+        <div class="proj-info"><div class="proj-org">Airspeeder : Executive Producer</div><div class="proj-desc">Executive produced the world's first crewed eVTOL race in 2021 and the first three-way race in 2022. Broadcast to 153 countries.</div></div>
+      </div>
+      <div class="proj-card">
+        <img class="proj-img" src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=760&q=80" alt="TV Series" loading="lazy">
+        <div class="proj-info"><div class="proj-org">Airspeeder : TV Series / DAZN &amp; Fox Sports</div><div class="proj-desc">Executive produced two original TV series, aired on DAZN and Fox Sports Australia to a global audience.</div></div>
+      </div>
+      <div class="proj-card">
+        <img class="proj-img" src="roborace.jpg" alt="Roborace" loading="lazy">
+        <div class="proj-info"><div class="proj-org">Roborace : Guinness World Record</div><div class="proj-desc">Executive produced the Guinness World Record for the Fastest Autonomous Car as part of the world's first driverless racing series.</div></div>
+      </div>
+      <div class="proj-card">
+        <img class="proj-img" src="goodwood.jpg" alt="Goodwood" loading="lazy">
+        <div class="proj-info"><div class="proj-org">Goodwood : Best in Social Award</div><div class="proj-desc">Led the digital strategy for Qatar Goodwood Festival, winning Best in Social Class at the Racecourse Media Awards 2017.</div></div>
+      </div>
+      <div class="proj-card">
+        <img class="proj-img" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=760&q=80" alt="Intel Partnership" loading="lazy">
+        <div class="proj-info"><div class="proj-org">Airspeeder : Intel $1.3M Partnership</div><div class="proj-desc">Secured a $1.3M Intel sponsorship, contributing to Airspeeder's growth from $5M to a $100M valuation.</div></div>
+      </div>
+      <div class="proj-card">
+        <img class="proj-img" src="https://images.unsplash.com/photo-1517976487492-5750f3195933?w=760&q=80" alt="LEO Flight" loading="lazy">
+        <div class="proj-info"><div class="proj-org">LEO Flight : Brand &amp; GTM Strategy</div><div class="proj-desc">Building brand strategy and go-to-market plans for a next-generation advanced mobility company launching in 2026.</div></div>
+      </div>
+      <div class="proj-card">
+        <img class="proj-img" src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=760&q=80" alt="SXSW Speaking" loading="lazy">
+        <div class="proj-info"><div class="proj-org">SXSW : Speaker</div><div class="proj-desc">Speaker at South by Southwest on the future of sport, media innovation and go-to-market strategy for category-defining companies.</div></div>
+      </div>
+      <div class="proj-card">
+        <img class="proj-img" src="/mnt/data/subsea.png" alt="Subsea Craft" loading="lazy">
+        <div class="proj-info"><div class="proj-org">Subsea Craft : Marketing Advisor</div><div class="proj-desc">Marketing advisor to Subsea Craft, a British defence technology company developing high-speed underwater craft for special operations.</div></div>
+      </div>
+
+      </div></div></section>
+
+<!-- 7. RECOGNITION -->
+<section class="recog-section">
+  <span class="recog-kicker">Recognition</span>
+  <div class="recog-list">
+    <div class="recog-item" data-recog><span class="recog-num">01</span><span class="recog-body">Airspeeder</span><span class="recog-name">eVTOL Insights:Marketing:Team of the Year</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">02</span><span class="recog-body">Airspeeder</span><span class="recog-name">eVTOL Insights:One to Watch</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">03</span><span class="recog-body">Airspeeder</span><span class="recog-name">STA:Sports Partnership of the Year:Finalist</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">04</span><span class="recog-body">Airspeeder</span><span class="recog-name">STA:Sports Partnership of the Year:Finalist</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">05</span><span class="recog-body">Airspeeder</span><span class="recog-name">Leaders:Tech Breakthrough:Finalist</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">06</span><span class="recog-body">Broadcast Sports Awards</span><span class="recog-name">Judge:2022</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">07</span><span class="recog-body">Broadcast Sports Awards</span><span class="recog-name">Judge:2023</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">08</span><span class="recog-body">Broadcast Sports Awards</span><span class="recog-name">Judge:2024</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">09</span><span class="recog-body">Broadcast Sports Awards</span><span class="recog-name">Judge:2025</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">10</span><span class="recog-body">Engage Digital Partners</span><span class="recog-name">Festival of Media Global:Mastercard Livestream:Finalist</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">11</span><span class="recog-body">Engage Digital Partners</span><span class="recog-name">Racecourse Media Awards:Best in Social:Winner</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">12</span><span class="recog-body">Demotix</span><span class="recog-name">The Webby Awards:Digital Media</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">13</span><span class="recog-body">Engage Digital Partners</span><span class="recog-name">The Drum Awards:Sports Strategy of the Year:Finalist</span></div>
+    <div class="recog-item" data-recog><span class="recog-num">14</span><span class="recog-body">Airspeeder</span><span class="recog-name">SXSW:Speaker:2025</span></div>
+  </div>
+</section>
+
+<!-- 8. FOOTER -->
+<footer>
+  <div class="ft-name">Stephen<br>Sidlo</div>
+  <div class="ft-bottom">
+    <div>
+      <a class="ft-email" href="mailto:stephen@leftfollowsright.com">stephen@leftfollowsright.com</a>
+      <div class="ft-note">Please send a note with any speaking or media enquiries</div>
+    </div>
+    <div class="ft-r">Aberdeen, Scotland<br>Working globally<br>&#169; Stephen Sidlo 2026</div>
+  </div>
+</footer>
+
+<script>
+/* ── GALLERY DATA ── */
+document.querySelector('.gal-inner')?.addEventListener('click', e=>e.stopPropagation());
+
+const GALLERY=[
+  {id:'airspeeder',img:'/mnt/data/airspeeder.png',co:'Global Creative Director · 2020–2025',title:'Airspeeder',desc:"Spearheaded the broadcast, marketing and media strategy for the world's first eVTOL racing series. Implemented world-first onboard camera systems, led broadcast pitches to NBC, Foxtel and DAZN, and produced the world's first live eVTOL race. Drove commercial deals with Intel ($1.3M), IWC and Telstra, growing the company from $5M to a $100M Series B valuation.",stats:[{n:'$100M',l:'Series B'},{n:'153',l:'Countries'},{n:'$167M',l:'Media value'},{n:'10K+',l:'Press articles'}]},
+  {id:'arrival',img:'https://electrek.co/wp-content/uploads/sites/3/2021/01/Arrival-Van.jpg',co:'Chief Marketing Officer · 2019–2020',title:'Arrival',desc:"Served on the senior leadership team that built the UK's first tech unicorn, valued at £9B. Led go-to-market strategy and brand execution for a new EV van entering market, overseeing platform partnerships and public market positioning ahead of the IPO on the London Stock Exchange.",stats:[{n:'£9B',l:'Valuation'},{n:'#1',l:'UK Tech Unicorn'},{n:'IPO',l:'London listing'},{n:'CMO',l:'Senior Leadership'}]},
+  {id:'roborace',img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Robocar_at_Goodwood_Festival_of_Speed_2018.jpg/1280px-Robocar_at_Goodwood_Festival_of_Speed_2018.jpg',co:'Chief Marketing Officer · 2019–2020',title:'Roborace',desc:"Shaped the broadcast and media strategy for the world's first fully autonomous racing series. Led all digital and production efforts across a team of eight. Executive produced the Guinness World Record for the Fastest Autonomous Car.",stats:[{n:"World's",l:'1st Autonomous Series'},{n:'Guinness',l:'World Record'},{n:'8',l:'Person team'},{n:'Global',l:'Broadcast reach'}]},
+  {id:'goodwood',img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Goodwood_Festival_of_Speed_2012_%287526895240%29.jpg/1280px-Goodwood_Festival_of_Speed_2012_%287526895240%29.jpg',co:'Head of Audience Development · 2015–2020',title:'Goodwood & World Rugby',desc:"Led digital and audience strategy for Goodwood Estate and World Rugby at Engage Digital Partners. Launched #MyRugbyMoment, a UGC campaign generating over 6,000 submissions. Won Best in Social Class at the Racecourse Media Awards for the Qatar Goodwood Festival 2017.",stats:[{n:'6,000+',l:'UGC submissions'},{n:'Award',l:'Best in Social'},{n:'MLB',l:'Also client'},{n:'5yr',l:'Partnership'}]},
+  {id:'elire',img:'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1200&q=80',co:'Strategic Advisor · Ongoing',title:'ELIRE Group',desc:"Works with the ELIRE Group in a senior advisory capacity, shaping go-to-market strategy and brand positioning across its portfolio of deep tech and innovation businesses, spanning narrative development, strategic partnerships and market entry for companies at the frontier of what is possible.",stats:[{n:'GTM',l:'Strategy'},{n:'Deep',l:'Tech sector'},{n:'Brand',l:'Architecture'},{n:'Ongoing',l:'Advisory'}]},
+  {id:'leo',img:'https://images.unsplash.com/photo-1517976487492-5750f3195933?w=1200&q=80',co:'Brand & GTM Strategy · 2025–Present',title:'LEO Flight',desc:"Leads brand strategy and go-to-market planning for LEO Flight, an advanced mobility company developing next-generation flight platforms. Work encompasses brand identity, investor narrative, media strategy and commercial partnership development ahead of a 2026 market launch.",stats:[{n:'Brand',l:'Architecture'},{n:'GTM',l:'Strategy'},{n:'Investor',l:'Narrative'},{n:'2026',l:'Launch'}]}
+];
+
+let galIdx=0;
+
+function openGallery(id){
+  const idx=GALLERY.findIndex(g=>g.id===id);
+  if(idx<0) return;
+  galIdx=idx;
+  renderGallery();
+  document.getElementById('galBd').style.display='block';
+  requestAnimationFrame(()=>{
+    document.getElementById('galBd').classList.add('vis');
+    document.getElementById('galModal').classList.add('open');
+  });
+  document.body.style.overflow='hidden';
+}
+
+function renderGallery(){
+  const d=GALLERY[galIdx];
+  document.getElementById('galImg').src=d.img;
+  document.getElementById('galImg').alt=d.title;
+  document.getElementById('galCo').textContent=d.co;
+  document.getElementById('galTitle').textContent=d.title;
+  document.getElementById('galDesc').textContent=d.desc;
+  document.getElementById('galStats').innerHTML=d.stats.map(s=>`<div class="gstat"><div class="gstat-n">${s.n}</div><div class="gstat-l">${s.l}</div></div>`).join('');
+  document.getElementById('galCounter').textContent=`${galIdx+1} / ${GALLERY.length}`;
+}
+
+function closeGallery(){
+  document.getElementById('galBd').classList.remove('vis');
+  document.getElementById('galModal').classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(()=>document.getElementById('galBd').style.display='none',380);
+}
+
+document.getElementById('galClose').addEventListener('click',closeGallery);
+document.getElementById('galBd').addEventListener('click',closeGallery);
+document.getElementById('galModal').addEventListener('click',closeGallery);
+document.getElementById('galNext').addEventListener('click',e=>{e.stopPropagation();galIdx=(galIdx+1)%GALLERY.length;renderGallery();});
+document.getElementById('galPrev').addEventListener('click',e=>{e.stopPropagation();galIdx=(galIdx-1+GALLERY.length)%GALLERY.length;renderGallery();});
+
+/* keyboard nav */
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('galModal').classList.contains('open')) return;
+  if(e.key==='ArrowRight'){galIdx=(galIdx+1)%GALLERY.length;renderGallery();}
+  if(e.key==='ArrowLeft'){galIdx=(galIdx-1+GALLERY.length)%GALLERY.length;renderGallery();}
+  if(e.key==='Escape') closeGallery();
+});
+
+/* open from experience rows */
+document.querySelectorAll('.exp-row').forEach(row=>{
+  row.addEventListener('click',()=>openGallery(row.dataset.id));
+});
+
+/* HERO NAME: expand on scroll */
+const heroName=document.getElementById('heroName');
+window.addEventListener('scroll',()=>{
+  const p=Math.min(window.scrollY/window.innerHeight,1);
+  heroName.style.transform=`scale(${1+p*0.35})`;
+},{passive:true});
+
+/* DISCIPLINES: each lights individually */
+const discObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('lit');
+    else e.target.classList.remove('lit');
+  });
+},{threshold:0.7});
+document.querySelectorAll('[data-disc]').forEach(el=>discObs.observe(el));
+
+/* RECOGNITION: light then dim as scroll moves past */
+const recogObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('lit');
+    else e.target.classList.remove('lit');
+  });
+},{threshold:0.55,rootMargin:'-8% 0px -8% 0px'});
+document.querySelectorAll('[data-recog]').forEach(el=>recogObs.observe(el));
+
+document.querySelectorAll('.company').forEach((el,i)=>{
+  el.addEventListener('click',()=>{
+    const ids=['airspeeder','arrival','roborace','goodwood','elire','leo'];
+    openGallery(ids[i]);
+  });
+});
+
+/* REVEAL */
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+    }
+  });
+},{threshold:0.15});
+
+document.querySelectorAll('section').forEach(sec=>{
+  sec.classList.add('reveal');
+  revealObs.observe(sec);
+});
+
+/* HERO PARALLAX */
+const hero = document.querySelector('.hero');
+window.addEventListener('scroll',()=>{
+  const p = Math.min(window.scrollY / window.innerHeight, 1);
+
+  heroName.style.transform = `
+    scale(${1 + p*0.35})
+    translateY(${p * -40}px)
+  `;
+
+  hero.style.transform = `translateY(${p * 20}px)`;
+},{passive:true});
+
+</script>
+<div class="grain"></div>
+</body>
+</html>

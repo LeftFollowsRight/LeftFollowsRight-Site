@@ -32,7 +32,7 @@ nav{
   bottom:20px;
   left:44px;
   z-index:2;
-  font-size:14px;
+  font-size:24px;
   opacity:.6;
   letter-spacing:.02em;
   color:#fff;
@@ -164,7 +164,26 @@ nav{
 
 /* SECTION 6: PROJECTS — square 1:1, auto-scroll */
 .proj-label{padding:28px 44px 20px;border-bottom:1px solid var(--r);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--g);}
-.proj-outer{overflow:hidden;}
+.proj-outer{overflow:hidd.proj-outer{
+  position:relative;
+  overflow:hidden;
+}
+
+.proj-outer::before,
+.proj-outer::after{
+  content:"";
+  position:absolute;
+  top:0;
+  width:80px;
+  height:100%;
+  z-index:2;
+  pointer-events:none;
+}
+
+.proj-outer::before{
+  left:0;
+  background:linear-gradient(to right, #fff, transparent);
+}en;}
 .proj-track{display:flex;width:max-content;animation:pscroll 48s linear infinite;}
 .proj-outer:hover .proj-track{animation-play-state:paused;}
 @keyframes pscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}

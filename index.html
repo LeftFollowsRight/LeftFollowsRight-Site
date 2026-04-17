@@ -408,6 +408,113 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
     "https://www.linkedin.com/in/stephensidlo"
   ]
 }
+
+  /* =========================
+   MOBILE OPTIMISATION
+========================= */
+@media (max-width: 768px){
+
+  /* GLOBAL SPACING */
+  nav{
+    padding:16px 20px;
+  }
+
+  .bio,
+  .disc-section,
+  .interlude,
+  .proj-label,
+  footer{
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  /* HERO */
+  .hero-name{
+    font-size:clamp(48px,18vw,90px);
+    left:16px;
+    bottom:24px;
+  }
+
+  .hero-sub{
+    left:20px;
+    bottom:12px;
+    font-size:16px;
+    max-width:80%;
+  }
+
+  /* BIO */
+  .bio p{
+    font-size:20px;
+  }
+
+  /* WHAT I DO */
+  .disc-wrap{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+
+  .disc-right{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .company{
+    font-size:12px;
+  }
+
+  /* INTERLUDE */
+  .interlude-wrap{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+
+  .interlude-img{
+    justify-content:flex-start;
+  }
+
+  .interlude-img img{
+    max-width:100%;
+  }
+
+  /* PROJECTS */
+  .proj-card{
+    flex:0 0 240px;
+  }
+
+  .proj-img{
+    width:240px;
+    height:240px;
+  }
+
+  /* RECOGNITION */
+  .recog-item{
+    grid-template-columns:40px 1fr;
+    gap:12px;
+  }
+
+  .recog-body{
+    display:none;
+  }
+
+  .recog-name{
+    font-size:20px;
+  }
+
+  /* FOOTER */
+  .ft-name{
+    font-size:64px;
+  }
+
+  .ft-bottom{
+    flex-direction:column;
+    gap:20px;
+    align-items:flex-start;
+  }
+
+  .ft-r{
+    text-align:left;
+  }
+}
 </script>
 </style>
 </head>

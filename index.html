@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
 <title>Left Follows Right // Stephen Sidlo // Creative Strategist</title>
   <meta name="description" content="Stephen Sidlo is a marketing and media strategist working at the frontier of aviation, autonomy and deep tech.">
@@ -27,12 +27,18 @@ html{scroll-behavior:smooth;}
 body{background:var(--w);color:var(--b);font-family:var(--f);font-weight:300;overflow-x:hidden;}
 
 
-
+html, body{
+  max-width:100%;
+  overflow-x:hidden;
+}
 /* NAV */
 nav{
   position:fixed;
   top:0;left:0;right:0;
   z-index:300;
+  width:100%;
+  max-width:100vw;
+  box-sizing:border-box;
   display:flex;
   justify-content:space-between;
   align-items:center;

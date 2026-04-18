@@ -49,6 +49,8 @@ nav{
 .nlink{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-decoration:none;opacity:.6;transition:opacity .2s;}
 .nlink:hover{opacity:1;}
 
+  
+
 /* SECTION 1: HERO */
 .hero-sub{
   position:absolute;
@@ -243,8 +245,75 @@ nav{
 .recog-body{font-size:11px;font-weight:400;letter-spacing:.02em;color:rgba(255,255,255,.25);transition:color .4s ease;padding-right:24px;line-height:1.3;padding-top:5px;}
 .recog-item.lit .recog-body{color:rgba(255,255,255,.5);}
 .recog-name{font-size:clamp(20px,2.8vw,40px);font-weight:700;line-height:1.05;letter-spacing:-.02em;transition:color .4s ease;}
+  
+/* SECTION 8: CTA */
+  <section class="cta">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Collaborate</div>
+    <h2 class="cta-title">
+      Working with a limited number of companies<br>
+      shaping what comes next.
+    </h2>
+    <p class="cta-text">
+      From go-to-market strategy to global storytelling, I partner with teams building at the frontier of innovation.
+    </p>
+    <a href="mailto:stephen@leftfollowsright.com" class="cta-link">
+      Start a conversation →
+    </a>
+  </div>
+</section>
 
-/* SECTION 8: FOOTER */
+  .cta{
+  background:#0b0b0b;
+  color:#fff;
+  padding:120px 44px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.cta-inner{
+  max-width:900px;
+}
+
+.cta-eyebrow{
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+  margin-bottom:28px;
+}
+
+.cta-title{
+  font-size:clamp(28px,4vw,56px);
+  font-weight:700;
+  line-height:1.1;
+  letter-spacing:-.03em;
+  margin-bottom:24px;
+}
+
+.cta-text{
+  font-size:16px;
+  line-height:1.7;
+  color:rgba(255,255,255,.6);
+  margin-bottom:36px;
+  max-width:600px;
+}
+
+.cta-link{
+  font-size:14px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.3);
+  padding-bottom:4px;
+  transition:all .25s ease;
+}
+
+.cta-link:hover{
+  border-color:#fff;
+}
+
+/* SECTION 9: FOOTER */
 footer{
   background:var(--b);
   border-top:1px solid rgba(255,255,255,.08);

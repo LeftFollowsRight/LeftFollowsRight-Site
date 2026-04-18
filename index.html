@@ -432,31 +432,28 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
     padding-right:20px;
   }
 
-  /* HERO */
+  /* HERO (mobile) */
 
-  .hero{
-    display:flex;
-    align-items:left;
-    justify-content:left;
-    text-align:left;
-  }
+.hero{
+  display:block;
+  text-align:left;
+  padding:0 20px;
+}
 
-  
-  .hero-name{
-    font-size:clamp(48px,18vw,90px);
-    position:relative;
-    left:0px;
-    bottom:0px;
-  }
+.hero-name{
+  font-size:clamp(48px,18vw,90px);
+  position:absolute;
+  left:20px;
+  bottom:60px;
+}
 
-  .hero-sub{
-    left:20px;
-    position:relative;
-    bottom:12px;
-    font-size:16px;
-    margin-top:12px;
-    max-width:80%;
-  }
+.hero-sub{
+  position:absolute;
+  left:20px;
+  bottom:20px;
+  font-size:16px;
+  max-width:80%;
+}
 
   /* BIO */
     .interlude p{

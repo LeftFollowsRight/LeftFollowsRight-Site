@@ -441,41 +441,49 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   }
 
   /* HERO (clean + consistent) */
-  .hero{
-    position:relative;
-    width:100%;
-    height:100vh;
-    overflow:hidden;
+  /* HERO (refined mobile spacing) */
+.hero{
+  position:relative;
+  width:100%;
+  height:calc(100vh - 70px);
+  margin-top:70px;
+  overflow:hidden;
 
-    display:flex;
-    align-items:flex-end;
-    justify-content:flex-start;
-    text-align:left;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-start;
+  text-align:left;
 
-    padding:0 20px;
-  }
+  padding:0 24px 28px;
+}
 
-  /* LIGHTER IMAGE + BETTER FRAMING */
-  .hero::before{
-    opacity:.2;
-    background-position:60% center;
-  }
+/* Image tweak */
+.hero::before{
+  opacity:.22;
+  background-position:65% center;
 
-  .hero-name{
-    font-size:clamp(48px,18vw,90px);
-    position:absolute;
-    left:20px;
-    right:20px;
-    bottom:60px;
-  }
+ .hero-name{
+  font-size:clamp(44px,16vw,84px);
+  line-height:.9;
+  letter-spacing:-.04em;
 
-  .hero-sub{
-    position:absolute;
-    left:20px;
-    bottom:20px;
-    font-size:16px;
-    max-width:80%;
-  }
+  position:absolute;
+  left:24px;
+  right:24px;
+  bottom:72px;
+}
+
+/* SUBHEAD — push down + improve readability */
+.hero-sub{
+  position:absolute;
+  left:24px;
+  right:24px;
+  bottom:28px;
+
+  font-size:15px;
+  line-height:1.4;
+  max-width:85%;
+}
 
   /* BIO */
   .bio p{

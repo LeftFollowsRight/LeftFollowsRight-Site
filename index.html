@@ -421,11 +421,16 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 ========================= */
 @media (max-width: 768px){
 
-  /* GLOBAL SPACING */
+  /* NAV SPACING FIX */
+  body{
+    padding-top:70px;
+  }
+
   nav{
     padding:16px 20px;
   }
 
+  /* GLOBAL SPACING */
   .bio,
   .disc-section,
   .interlude,
@@ -435,36 +440,50 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
     padding-right:20px;
   }
 
-  /* HERO (mobile) */
+  /* HERO (clean + consistent) */
+  .hero{
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
 
-.hero{
-  display:block;
-  text-align:left;
-  padding:0 20px;
-}
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-start;
+    text-align:left;
 
-.hero-name{
-  font-size:clamp(48px,18vw,90px);
-  position:absolute;
-  left:20px;
-  bottom:60px;
-}
+    padding:0 20px;
+  }
 
-.hero-sub{
-  position:absolute;
-  left:20px;
-  bottom:20px;
-  font-size:16px;
-  max-width:80%;
-}
+  /* LIGHTER IMAGE + BETTER FRAMING */
+  .hero::before{
+    opacity:.2;
+    background-position:60% center;
+  }
+
+  .hero-name{
+    font-size:clamp(48px,18vw,90px);
+    position:absolute;
+    left:20px;
+    right:20px;
+    bottom:60px;
+  }
+
+  .hero-sub{
+    position:absolute;
+    left:20px;
+    bottom:20px;
+    font-size:16px;
+    max-width:80%;
+  }
 
   /* BIO */
-    .interlude p{
-  text-align:center;
-}
-
-.bio p{
+  .bio p{
     font-size:20px;
+  }
+
+  .interlude p{
+    text-align:center;
   }
 
   /* WHAT I DO */
@@ -533,7 +552,7 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 
   .ft-r{
     text-align:left;
-  }
+
 }
 </script>
 </style>

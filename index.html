@@ -425,15 +425,27 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   /* =========================
    MOBILE OPTIMISATION
 ========================= */
+/* =========================
+   MOBILE OPTIMISATION
+========================= */
 @media (max-width: 768px){
 
-  /* NAV SPACING FIX */
   body{
     padding-top:70px;
   }
 
   nav{
     padding:16px 20px;
+    justify-content:space-between;
+  }
+
+  /* Center brand in nav */
+  nav div:nth-child(2){
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    white-space:nowrap;
   }
 
   /* GLOBAL SPACING */
@@ -446,56 +458,43 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
     padding-right:20px;
   }
 
-  /* HERO (clean + consistent) */
-  /* HERO (refined mobile spacing) */
-.hero{
-  position:relative;
-  width:100%;
-  height:calc(100vh - 70px);
-  margin-top:70px;
-  overflow:hidden;
+  /* HERO */
+  .hero{
+    height:calc(100vh - 70px);
+    margin-top:70px;
+    padding:0 20px 32px;
+    display:flex;
+    align-items:flex-end;
+  }
 
-  display:flex;
-  align-items:flex-end;
-  justify-content:flex-start;
-  text-align:left;
+  .hero::before{
+    opacity:.22;
+    background-position:65% center;
+  }
 
-  padding:0 24px 28px;
-}
+  .hero-name{
+    font-size:clamp(48px,15vw,82px);
+    line-height:.92;
+    letter-spacing:-.04em;
+    left:20px;
+    right:20px;
+    bottom:96px;
+    position:absolute;
+  }
 
-/* Image tweak */
-.hero::before{
-  opacity:.22;
-  background-position:65% center;
-
- .hero-name{
-  font-size:clamp(44px,16vw,84px);
-  line-height:.9;
-  letter-spacing:-.04em;
-  position:absolute;
-  left:24px;
-  right:24px;
-  bottom:80px;
-}
-
-/* SUBHEAD — push down + improve readability */
-.hero-sub{
-  position:absolute;
-  left:24px;
-  right:24px;
-  bottom:28px;
-  font-size:15px;
-  line-height:1.5;
-  max-width:75%;
-}
+  .hero-sub{
+    left:20px;
+    right:20px;
+    bottom:32px;
+    font-size:15px;
+    line-height:1.5;
+    max-width:85%;
+    opacity:.8;
+  }
 
   /* BIO */
   .bio p{
     font-size:20px;
-  }
-
-  .interlude p{
-    text-align:center;
   }
 
   /* WHAT I DO */
@@ -506,12 +505,19 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 
   .disc-right{
     grid-template-columns:1fr;
-    margin-top:20px;
     gap:16px;
+    margin-top:20px;
   }
 
   .company{
     font-size:12px;
+  }
+
+  /* PROFILE IMAGE SCALE UP */
+  .interlude-img img{
+    max-width:100%;
+    transform:scale(1.3);
+    transform-origin:left center;
   }
 
   /* INTERLUDE */
@@ -520,14 +526,8 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
     gap:32px;
   }
 
-  .interlude-img{
-    justify-content:flex-start;
-  }
-
-  .interlude-img img{
-  max-width:100%;
-  transform:scale(1.3);
-  transform-origin:left center;
+  .interlude p{
+    text-align:center;
   }
 
   /* PROJECTS */
@@ -538,6 +538,15 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   .proj-img{
     width:240px;
     height:240px;
+  }
+
+  /* PREVENT HORIZONTAL SCROLL (critical) */
+  .proj-track{
+    width:max-content;
+  }
+
+  .proj-outer{
+    overflow:hidden;
   }
 
   /* RECOGNITION */
@@ -567,7 +576,7 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 
   .ft-r{
     text-align:left;
-
+  }
 }
 </script>
 </style>

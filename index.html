@@ -363,13 +363,6 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   opacity:.7;
 }
 
-.disc-wrap{
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
-  gap:120px;
-  align-items: stretch;
-}
-
 .exp-section-inline{
   background:var(--b);
 }
@@ -390,16 +383,18 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   color:rgba(255,255,255,.7);
 }
 
-.disc-section{
-  background:var(--b);
-  padding:140px 44px;
+/* --- WHAT I DO SECTION FIX --- */
+
+.disc-section {
+  background: var(--b);
+  padding: 140px 44px;
 }
 
 .disc-wrap {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 120px;
-  /* This is the key change: center the columns relative to each other */
+  /* This centers the right column vertically against the tall left column */
   align-items: center; 
 }
 
@@ -414,25 +409,21 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 28px 60px;
-  /* align-content is now redundant if the parent is centered, but fine to keep */
-  align-content: center;
-  margin-top: 0;
 }
 
-.company{
-  font-size:21px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.6);
-  cursor:pointer;
-  transition:color .25s ease, transform .25s ease, letter-spacing .25s ease;
-
+.company {
+  font-size: 21px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  cursor: pointer;
+  transition: color .25s ease, transform .25s ease, letter-spacing .25s ease;
 }
 
-.company:hover{
-  color:#fff;
-  transform:translateX(-6px);
-  letter-spacing:.24em;
+.company:hover {
+  color: #fff;
+  transform: translateX(-6px);
+  letter-spacing: .24em;
 }
 
 .reveal{

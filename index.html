@@ -78,6 +78,10 @@ nav{
 }
 .hero::after{
   display:none;
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.6), transparent 60%);
 }
 
 .hero-name{
@@ -719,7 +723,7 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   </div>
 
   <div class="proj-card">
-    <video class="proj-img" autoplay muted loop playsinline>
+    <video class="proj-img" autoplay muted loop playsinline preload="none">
       <source src="assets/videos/airspeedervid.mp4" type="video/mp4">
     </video>
     <div class="proj-info">
@@ -756,7 +760,7 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   </div>
 
    <div class="proj-card">
-    <video class="proj-img" autoplay muted loop playsinline>
+    <video class="proj-img" autoplay muted loop playsinline preload="none">
       <source src="assets/videos/subsea.mp4" type="video/mp4">
     </video>
     <div class="proj-info">
@@ -774,7 +778,7 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   </div>
 
   <div class="proj-card">
-    <video class="proj-img" autoplay muted loop playsinline>
+    <video class="proj-img" autoplay muted loop playsinline preload="none">
       <source src="assets/videos/airspeedervid.mp4" type="video/mp4">
     </video>
     <div class="proj-info">

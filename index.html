@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preload" as="image" href="assets/images/blackwallpaper.jpg" fetchpriority="high">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
@@ -336,7 +337,12 @@ footer{
 font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;display:block;margin-bottom:8px;transition:color .2s;}
 .ft-email:hover{color:#fff;}
 .ft-note{
-  color:rgba(255,255,255,.85);font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.06em;line-height:1.7;}
+  color: #fff; /* Changed from rgba(255,255,255,.2) */
+  font-size: 11px;
+  letter-spacing: .06em;
+  line-height: 1.7;
+  opacity: 1; /* Ensure no transparency is lingering */
+}
 .ft-r{
   color:rgba(255,255,255,.85);font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.08em;line-height:2.2;text-align:right;}
 

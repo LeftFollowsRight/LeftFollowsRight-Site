@@ -56,7 +56,7 @@ html, body{
 nav{
   position:fixed;
   top:0;left:0;right:0;
-  z-index:300;
+  z-index:1000;
   width:100%;
   max-width:100vw;
   box-sizing:border-box;
@@ -65,7 +65,7 @@ nav{
   align-items:center;
   padding:22px 44px;
   backdrop-filter:blur(10px);
-  background:rgba(0,0,0,.15);
+  background: #000;
 }
 .nlink{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-decoration:none;opacity:.6;transition:opacity .2s;}
 .nlink:hover{opacity:1;}
@@ -522,6 +522,13 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   .interlude,
   .proj-label,
   footer{
+    border-top: none !important;
+    border-bottom: none !important;
+    outline: none !important;
+    margin-top: -1px; 
+    padding-top: 60px; /* Gives the footer content some breathing room */
+    position: relative;
+    z-index: 2;
     padding-left:20px;
     padding-right:20px;
   }

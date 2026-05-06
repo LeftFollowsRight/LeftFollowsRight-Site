@@ -667,23 +667,34 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
     margin: 0 auto; /* Centers the image if it's smaller than the screen */
   }
 
-  /* INTERLUDE */
-interlude {
-    padding: 80px 20px;
+  /* INTERLUDE MOBILE FIX */
+  .interlude {
+    padding: 80px 20px !important;
   }
+
   .interlude-wrap {
-    grid-template-columns: 1fr; /* Stacks on mobile */
+    grid-template-columns: 1fr !important; /* Forces vertical stack */
     gap: 40px;
     text-align: center;
   }
+
   .interlude-img {
     justify-content: center;
   }
+
+  .interlude-img img {
+    max-width: 100%;
+    transform: scale(1.0);
+  }
+
   .interlude-text {
     text-align: center;
   }
+
   .interlude-text p {
     font-size: 20px;
+    text-align: center;
+    margin: 0 auto;
   }
 
   /* PROJECTS */

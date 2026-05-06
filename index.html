@@ -464,36 +464,53 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 }
 
 
-.interlude-wrap{
- display: grid;
-    grid-template-columns: 420px 1fr; /* Exact width for image, remaining space for text */
-    gap: 80px;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 120px 44px;
+/* SECTION 5: INTERLUDE - DESKTOP */
+.interlude {
+  padding: 120px 44px;
+  border-top: 1px solid var(--r);
+  border-bottom: 1px solid var(--r);
+  background: #fff;
 }
-.interlude-img{
- display:flex;
-  justify-content: flex-start; /* This moves image to the left */
+
+.interlude-wrap {
+  display: grid;
+  /* Lock the image to 420px and let the text take the rest of the 1200px container */
+  grid-template-columns: 420px 1fr; 
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.interlude-img img{
-  width:100%;
-  max-width:420px;
-  height:auto;
-  display:block;
-  
-  object-fit:cover;
-  border-radius:2px;
-  box-shadow:0 30px 80px rgba(0,0,0,.12);
-  filter:grayscale(10%) contrast(1.05);
-  transform:none;
-  
+
+.interlude-img {
+  display: flex;
+  justify-content: flex-start;
 }
-  .interlude-text {
-  text-align: left; /* Ensures text aligns left in its column */
-    margin: 0;
-    max-width: 650px; /* Prevents lines from getting too long for readability */
+
+.interlude-img img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.12);
+  filter: grayscale(10%) contrast(1.05);
+}
+
+.interlude-text {
+  text-align: left;
+}
+
+.interlude-text p {
+  /* This ensures the font size matches your Bio section for consistency */
+  font-size: clamp(20px, 2.5vw, 30px); 
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #222;
+  margin: 0;
+  max-width: 680px; /* Prevents text from stretching too far for the eye to track */
 
     }
   :focus-visible{

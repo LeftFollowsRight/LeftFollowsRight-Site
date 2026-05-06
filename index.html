@@ -30,7 +30,7 @@
   
   <link rel="canonical" href="https://leftfollowsright.com/">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="assets/images/airspeedertakeoff.jpg">
 <link rel="preload" as="image" href="assets/images/arrivalev.jpg">
@@ -882,9 +882,9 @@ nav div:nth-child(2) {
   </div>
 
   <div class="proj-card">
-    <video class="proj-img" autoplay muted loop playsinline preload="none">
-      <source src="assets/videos/airspeedervid.mp4" type="video/mp4">
-    </video>
+    <video class="proj-img" autoplay muted loop playsinline preload="none" loading="lazy" poster="assets/images/airspeedertakeoff.jpg">
+  <source src="assets/videos/airspeedervid.mp4" type="video/mp4">
+</video>
     <div class="proj-info">
       <div class="proj-org">Airspeeder: Historic First Flying Car Race</div>
       <div class="proj-desc">

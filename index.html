@@ -465,12 +465,13 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 
 
 .interlude-wrap{
-  display: grid;
-    grid-template-columns: 1fr 1.2fr; /* Image column 1, Text column 2 */
+ display: grid;
+    grid-template-columns: 420px 1fr; /* Exact width for image, remaining space for text */
     gap: 80px;
     align-items: center;
-  max-width: 1200px; /* Optional: keeps it from getting too wide on huge monitors */
-  margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 44px;
 }
 .interlude-img{
  display:flex;
@@ -491,6 +492,8 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 }
   .interlude-text {
   text-align: left; /* Ensures text aligns left in its column */
+    margin: 0;
+    max-width: 650px; /* Prevents lines from getting too long for readability */
 
     }
   :focus-visible{

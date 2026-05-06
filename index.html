@@ -464,22 +464,26 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 }
 
 
-.interlude-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr; /* Image left (1 part), Text right (1.2 parts) */
-  gap: 80px;
-  align-items: center;
+.interlude-wrap{
+  display:grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap:80px;
+  align-items:center;
 }
 .interlude-img{
- display: flex;
-  justify-content: flex-start; /* This moves it back to the left */
+ display:flex;
+  justify-content:flex-end;
 }
-.interlude-img img {
-  width: 100%;
-  max-width: 420px;
-  height: auto;
-  display: block;
-  transform: none; /* Desktop stays normal */
+.interlude-img img{
+  width:100%;
+  max-width:420px;
+  height:auto;
+  display:block;
+  object-fit:cover;
+  border-radius:2px;
+  box-shadow:0 30px 80px rgba(0,0,0,.12);
+  filter:grayscale(10%) contrast(1.05);
+  transform:none;
   
 }
   :focus-visible{

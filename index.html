@@ -470,11 +470,11 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   border-top: 1px solid var(--r);
   border-bottom: 1px solid var(--r);
   background: #fff;
+  width: 100%;
 }
 
 .interlude-wrap {
   display: grid;
-  /* Lock the image to 420px and let the text take the rest of the 1200px container */
   grid-template-columns: 420px 1fr; 
   gap: 80px;
   align-items: center;
@@ -503,14 +503,56 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 }
 
 .interlude-text p {
-  /* This ensures the font size matches your Bio section for consistency */
   font-size: clamp(20px, 2.5vw, 30px); 
   font-weight: 300;
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: #222;
   margin: 0;
-  max-width: 680px; /* Prevents text from stretching too far for the eye to track */
+  max-width: 680px;
+}
+
+/* =========================
+   MOBILE OPTIMISATION
+========================= */
+@media (max-width: 768px) {
+
+  /* ... keep your body, nav, hero, bio code here ... */
+
+  /* FIX: Added missing brace for Profile Image Scale Up section */
+  .company {
+    font-size: 12px;
+  }
+
+  /* INTERLUDE MOBILE FIX */
+  .interlude {
+    padding: 80px 20px !important;
+  }
+
+  .interlude-wrap {
+    grid-template-columns: 1fr !important; /* Forces vertical stack */
+    gap: 40px;
+    text-align: center;
+  }
+
+  .interlude-img {
+    justify-content: center;
+  }
+
+  .interlude-img img {
+    max-width: 100%;
+    transform: scale(1.0);
+  }
+
+  .interlude-text {
+    text-align: center;
+  }
+
+  .interlude-text p {
+    font-size: 20px;
+    text-align: center;
+    margin: 0 auto;
+  }
 
     }
   :focus-visible{

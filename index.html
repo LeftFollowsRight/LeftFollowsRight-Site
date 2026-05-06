@@ -465,20 +465,21 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 
 
 .interlude-wrap{
-  display:grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap:80px;
-  align-items:center;
+  display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Image column 1, Text column 2 */
+    gap: 80px;
+    align-items: center;
 }
 .interlude-img{
  display:flex;
-  justify-content:flex-end;
+  justify-content: flex-start; /* This moves image to the left */
 }
 .interlude-img img{
   width:100%;
   max-width:420px;
   height:auto;
   display:block;
+  
   object-fit:cover;
   border-radius:2px;
   box-shadow:0 30px 80px rgba(0,0,0,.12);

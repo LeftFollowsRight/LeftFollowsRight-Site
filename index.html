@@ -618,33 +618,24 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   }
 
   /* INTERLUDE MOBILE FIX */
-  .interlude {
-    padding: 80px 20px !important;
-  }
-
-  .interlude-wrap {
-    grid-template-columns: 1fr !important; /* Forces vertical stack */
-    gap: 40px;
+.interlude-wrap {
+    flex-direction: column;
     text-align: center;
+    gap: 40px;
   }
-
-  .interlude-img {
-    justify-content: center;
-  }
-
-  .interlude-img img {
-    max-width: 100%;
-    transform: scale(1.0);
-  }
-
+  
   .interlude-text {
     text-align: center;
   }
 
   .interlude-text p {
-    font-size: 20px;
     text-align: center;
-    margin: 0 auto;
+    font-size: 20px;
+  }
+  
+  .interlude-img {
+    flex: 0 0 auto;
+    max-width: 300px;
   }
 
   /* PROJECTS */

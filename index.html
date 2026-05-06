@@ -466,13 +466,13 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 
 .interlude-wrap {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.2fr; /* Image left (1 part), Text right (1.2 parts) */
   gap: 80px;
   align-items: center;
 }
 .interlude-img{
- display:flex;
-  justify-content:flex-end;
+ display: flex;
+  justify-content: flex-start; /* This moves it back to the left */
 }
 .interlude-img img {
   width: 100%;

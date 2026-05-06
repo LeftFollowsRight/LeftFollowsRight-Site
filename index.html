@@ -617,24 +617,40 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
     margin: 0 auto; /* Centers the image if it's smaller than the screen */
 
   /* INTERLUDE MOBILE FIX */
-.interlude-wrap {
-    flex-direction: column;
-    text-align: center;
-    gap: 40px;
+.interlude {
+    padding: 60px 24px !important;
   }
-  
-.interlude-text {
+
+  .interlude-wrap {
+    display: block !important; /* Forces vertical stacking by breaking the flex row */
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .interlude-img {
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto 32px auto !important; /* Centers image and adds space below it */
+    display: block !important;
+  }
+
+  .interlude-img img {
+    width: 100%;
+    height: auto;
+  }
+
+  .interlude-text {
+    width: 100% !important;
+    display: block !important;
     text-align: center !important;
   }
 
   .interlude-text p {
+    font-size: 20px !important;
+    line-height: 1.5 !important;
     text-align: center !important;
-    font-size: 20px;
-  }
-  
-  .interlude-img {
-    flex: 0 0 auto;
-    max-width: 300px;
+    margin: 0 auto !important;
+    max-width: 100% !important;
   }
 
   /* PROJECTS */

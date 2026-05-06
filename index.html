@@ -519,29 +519,37 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
     padding-top:70px;
   }
 
-  nav{
+ nav {
   position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 70px; /* Explicitly match the body padding */
-    padding: 0 20px; /* Reduce horizontal padding for mobile */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #000; /* Solid black to cover the body padding */
-    box-sizing: border-box;
-    z-index: 1000;
-  }
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 70px;
+  padding: 0 15px; /* Tighter padding for narrow devices */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #000;
+  box-sizing: border-box;
+  z-index: 1000;
+}
 
-  /* Center brand in nav */
-  nav div:nth-child(2){
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    text-align:center;
-    white-space:nowrap;
+nav div:nth-child(2) {
+  position: relative; /* Removes it from hovering over the left link */
+  left: auto;
+  transform: none;
+  text-align: center;
+  flex: 1; /* Allows it to occupy the center space comfortably */
+  font-size: 10px; /* Slight scale down to ensure it fits the 360px width */
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+  .nlink {
+    font-size: 10px !important; /* Slightly smaller for narrow screens */
+    letter-spacing: 0.1em;
+    white-space: nowrap;
   }
 
   /* GLOBAL SPACING */

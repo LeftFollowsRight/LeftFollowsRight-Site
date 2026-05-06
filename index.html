@@ -12,7 +12,7 @@
 </script>
   <link rel="preload" as="image" href="assets/images/blackwallpaper.webp" fetchpriority="high">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
 <title>Left Follows Right // Stephen Sidlo // Creative Strategist</title>
   <meta name="description" content="Building Brands at the Frontier of Innovation: Aviation, Sports Tech, Autonomy, and Deep Tech."">
@@ -32,6 +32,7 @@
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="image" href="assets/images/airspeedertakeoff.jpg">
 <link rel="preload" as="image" href="assets/images/arrivalev.jpg">
 <style>
@@ -453,16 +454,17 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   letter-spacing: .24em;
 }
 
-.reveal{
-  opacity:0;
-  transform:translateY(40px);
-  transition:all .8s cubic-bezier(.2,.6,.2,1);
-}
-.reveal.visible{
-  opacity:1;
-  transform:translateY(0);
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all .8s cubic-bezier(.2, .6, .2, 1);
+  will-change: transform, opacity; /* <--- Add this line */
 }
 
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* SECTION 5: INTERLUDE - DESKTOP */
 .interlude {

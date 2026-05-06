@@ -467,51 +467,47 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
 /* SECTION 5: INTERLUDE - DESKTOP */
 .interlude {
   padding: 120px 44px;
+  background: #ffffff;
   border-top: 1px solid var(--r);
   border-bottom: 1px solid var(--r);
-  background: #fff;
   width: 100%;
 }
 
 .interlude-wrap {
-  display: grid;
-  grid-template-columns: 420px 1fr; 
-  gap: 80px;
+  display: flex; /* Using Flex for more stability than Grid here */
+  flex-direction: row;
   align-items: center;
-  max-width: 1200px;
+  justify-content: space-between;
+  max-width: 1100px; /* Limits overall container width */
   margin: 0 auto;
+  gap: 80px;
 }
 
 .interlude-img {
-  display: flex;
-  justify-content: flex-start;
+  flex: 0 0 420px; /* Forces the image container to stay at 420px */
 }
 
 .interlude-img img {
   width: 100%;
-  max-width: 420px;
   height: auto;
   display: block;
-  object-fit: cover;
   border-radius: 2px;
-  box-shadow: 0 30px 80px rgba(0,0,0,.12);
-  filter: grayscale(10%) contrast(1.05);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.1);
+  filter: grayscale(10%);
 }
 
 .interlude-text {
-  text-align: left;
+  flex: 1; /* Takes up the remaining space */
 }
 
 .interlude-text p {
-  font-size: clamp(20px, 2.5vw, 30px); 
+  font-size: clamp(20px, 2.5vw, 32px);
   font-weight: 300;
-  line-height: 1.5;
-  letter-spacing: -0.01em;
+  line-height: 1.4;
   color: #222;
   margin: 0;
-  max-width: 680px;
+  text-align: left;
 }
-
 
 /* =========================
    MOBILE OPTIMISATION

@@ -469,6 +469,8 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
     grid-template-columns: 1fr 1.2fr; /* Image column 1, Text column 2 */
     gap: 80px;
     align-items: center;
+  max-width: 1200px; /* Optional: keeps it from getting too wide on huge monitors */
+  margin: 0 auto;
 }
 .interlude-img{
  display:flex;
@@ -487,6 +489,10 @@ font-size:16px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;d
   transform:none;
   
 }
+  .interlude-text {
+  text-align: left; /* Ensures text aligns left in its column */
+
+    }
   :focus-visible{
   outline:2px solid #fff;
   outline-offset:2px;
